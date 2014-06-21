@@ -1,0 +1,368 @@
+package tv.luxs.rcassistant;
+
+import tv.luxs.config.G;
+import tv.luxs.rcassistant.connect.ConnectManager;
+import tv.luxs.rcassistant.connect.ServerManager;
+import tv.luxs.rcassistant.setting.SettingManager;
+import tv.luxs.rcassistant.utils.Utils;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.FrameLayout;
+
+public class RCActivity extends Activity {
+	Context context;
+	Activity activity;
+	
+	FrameLayout wrapper;
+	
+	final static int RC = 1;
+	final static int DP = 2;
+	SettingManager settingManager = new SettingManager();
+	
+	
+	String host;
+	boolean isConnecting = false;
+	ServerManager serverManager = new ServerManager();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if(G.ACTIVITY_CURRENT_RC == RC) setContentView(R.layout.activity_rc);
+		else if(G.ACTIVITY_CURRENT_RC == DP) setContentView(R.layout.activity_dp);
+		initUI();
+		serverManager.setActivity(this);
+		//自动连接
+		connect();
+		
+		addAction();
+		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		unregisterReceiver(homeReceiver);
+	}
+	
+	
+	/**
+	 * 初始化UI
+	 */
+	public void initUI(){
+		context = this;
+		activity = this;
+	}
+
+	/**
+	 * 连接
+	 */
+	public void connect(){
+		Utils.log("isConnecting" + isConnecting);
+		if(isConnecting == true) return;
+		
+		//获取默认机顶盒IP
+		host = serverManager.getHostIP(context);
+		if(host == null) {
+			Utils.toActivity(activity, SettingConnectActivity.class);
+			return;
+		}
+		//是否已连接？
+		boolean isConnected = ConnectManager.isConnected();
+		Utils.log("isConnected" + isConnected);
+		if(isConnected == true) {
+			return;
+		}else{
+			serverManager.setHostStatus(context, host, 0);
+		}
+		
+		new Thread(){
+			public void run() {
+				isConnecting = true;
+				boolean result = ConnectManager.connectServer(host);
+				if(result){
+					Message msg = connectHandler.obtainMessage();
+					msg.what = G.LOAD_SUCCESS;
+					msg.sendToTarget();
+				}else{
+					Message msg = connectHandler.obtainMessage();
+					msg.what = G.LOAD_FAILED;
+					msg.sendToTarget();
+				}
+			};
+		}.start();
+	}
+	
+	/**
+	 * 连接后更新UI
+	 */
+	Handler connectHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case G.LOAD_SUCCESS:
+				serverManager.setHostStatus(context, host, 1);
+				//Utils.toast(activity,"连接 " + host+ " 成功！");
+				break;
+			case G.LOAD_FAILED:
+				Utils.toActivity(activity, SettingConnectActivity.class);
+				break;
+			default:
+				break;
+			}
+			isConnecting = false;
+		};
+	};
+	
+	/**
+	 * 执行点击
+	 */
+	public void excute(int data){
+		settingManager.click(activity,handler);
+		if(isConnecting == true) {
+			Utils.toast(activity, "机顶盒连接不上！\n1.请检查机顶盒是否开启?\n2.手机WIFI是否与机顶盒在同一网段?\n或者点击乐更多 > 乐遥控设置 > 连接机顶盒中重新扫描连接！");
+			return;
+		}
+		new SendThread(data + "").start();
+	}
+	
+	/**
+	 * 发送消息线程
+	 */
+	class SendThread extends Thread{
+		String data;
+		public SendThread(String data) {
+			this.data = data;
+		}
+		@Override
+		public void run() {
+			boolean isSended = ConnectManager.send(data);
+			Utils.log("isSended:" + isSended);
+			Message msg = handler.obtainMessage();
+			msg.what = G.SEND;
+			msg.obj = isSended;
+			msg.sendToTarget();
+		};
+	}
+
+	/**
+	 * 发送返回
+	 */
+	Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			settingManager.vibrate(activity);
+			switch (msg.what) {
+			case G.SEND:
+				boolean isSended = (Boolean) msg.obj;
+				if(!isSended) {
+					connect();
+				}
+				break;
+			default:
+				break;
+			}
+		};
+	};
+	
+	/**
+	 * 切换功能和数字面板
+	 */
+	public void switchPanel(){
+		if(G.ACTIVITY_CURRENT_RC == RC) {
+			setContentView(R.layout.activity_dp);
+			G.ACTIVITY_CURRENT_RC = DP;
+		} else if(G.ACTIVITY_CURRENT_RC == DP) {
+			setContentView(R.layout.activity_rc);
+			G.ACTIVITY_CURRENT_RC = RC;
+		}
+	}
+	
+	/**
+	 * 触摸
+	 */
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			startX = event.getX();
+			startY = event.getY();
+Utils.log("按下: x=" + event.getX() + "y=" + event.getY());
+			break;
+		case MotionEvent.ACTION_MOVE:
+			isClick = false;
+Utils.log("移动: x=" + event.getX() + "y=" + event.getY());
+			break;
+		case MotionEvent.ACTION_UP:
+			endX = event.getX();
+			endY = event.getY();
+			
+			float x = 0;
+			if(startX >= endX) x = startX - endX;
+			else x = endX - startX;
+			
+			float y = 0;
+			if(startY >= endY) y = startY - endY;
+			else y = endY - startY;
+Utils.log("x:" + x + " y:" + y);
+			
+			//上/下/左/右键映射
+			if(x > y && y <= SENS_WEIDTH){
+				if(startX > endX + SENS_HEIGHT){
+					excute(G.VALUE_LEFT);
+					Utils.toast(activity, "keyCode:" + G.VALUE_LEFT);
+				}else if(startX < (endX - SENS_HEIGHT)){
+					excute(G.VALUE_RIGHT);
+					Utils.toast(activity, "keyCode:" + G.VALUE_RIGHT);
+				} 
+			}else if(x < y && x <= SENS_WEIDTH){
+				if(startY > endY + SENS_HEIGHT){
+					excute(G.VALUE_UP);
+					Utils.toast(activity, "keyCode:" + G.VALUE_UP);
+				}else if(startY < (endY - SENS_HEIGHT)){
+					excute(G.VALUE_BOTTOM);
+					Utils.toast(activity, "keyCode:" + G.VALUE_BOTTOM);
+				} 
+			}
+
+Utils.log("抬起: x=" + event.getX() + "y=" + event.getY());
+			break;
+		}
+		return true;
+	}
+	
+	
+	/**
+	 * 点击事件
+	 */
+	public void doClick(View view){
+		switch (view.getId()) {
+		case R.id.btnMenu:
+			excute(G.VALUE_MENU);
+			break;
+		case R.id.btnSwitch:
+			switchPanel();
+			break;
+		case R.id.btnHome:
+			excute(G.VALUE_HOME);
+			break;
+		case R.id.btnMusic:
+			excute(G.VALUE_MUSIC);
+			break;
+		case R.id.btnMouse:
+			Utils.toActivity(activity, MouseKeyboardActivity.class);
+			break;
+		case R.id.btnBack:
+			excute(G.VALUE_BACK);
+			break;
+		case R.id.btnOk:
+			excute(G.VALUE_OK);
+			break;
+		case R.id.btnUp:
+			excute(G.VALUE_UP);
+			break;
+		case R.id.btnBottom:
+			excute(G.VALUE_BOTTOM);
+			break;
+		case R.id.btnRight:
+			excute(G.VALUE_RIGHT);
+			break;
+		case R.id.btnLeft:
+			excute(G.VALUE_LEFT);
+			break;
+		case R.id.btnRed:
+			excute(G.VALUE_RED);
+			break;
+		case R.id.btnYellow:
+			excute(G.VALUE_YELLOW);
+			break;
+		case R.id.btnBlue:
+			excute(G.VALUE_BLUE);
+			break;
+		case R.id.btnGreen:
+			excute(G.VALUE_GREEN);
+			break;
+		
+		case R.id.btn1:
+			excute(G.VALUE_1);
+			break;
+		case R.id.btn2:
+			excute(G.VALUE_2);
+			break;
+		case R.id.btn3:
+			excute(G.VALUE_3);
+			break;
+		case R.id.btn4:
+			excute(G.VALUE_4);
+			break;
+		case R.id.btn5:
+			excute(G.VALUE_5);
+			break;
+		case R.id.btn6:
+			excute(G.VALUE_6);
+			break;
+		case R.id.btn7:
+			excute(G.VALUE_7);
+			break;
+		case R.id.btn8:
+			excute(G.VALUE_8);
+			break;
+		case R.id.btn9:
+			excute(G.VALUE_9);
+			break;
+		case R.id.btn0:
+			excute(G.VALUE_0);
+			break;
+		case R.id.btnVoiceUp:
+			excute(G.VALUE_VOLUME_UP);
+			break;
+		case R.id.btnVoiceDown:
+			excute(G.VALUE_VOLUME_DOWN);
+			break;
+		case R.id.btnMute:
+			excute(G.VALUE_MUTE);
+			break;
+		case R.id.btnCannelUp:
+			excute(G.VALUE_PLUS);
+			break;
+		case R.id.btnCannelDown:
+			excute(G.VALUE_MINUS);
+			break;
+		case R.id.btnQrcode:
+			Intent intent = new Intent();
+			intent.putExtra("type", 1);
+			intent.setClass(context, SettingConnectActivity.class);
+			startActivity(intent);
+			break;
+		}
+	}
+	
+	/**
+	 * 返回主页接收
+	 */
+	private BroadcastReceiver homeReceiver=new BroadcastReceiver() {
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			excute(G.VALUE_BACK);
+			excute(G.VALUE_HOME);
+		}
+	};
+	/**
+	 * 注册广播
+	 */
+	private void addAction(){
+		IntentFilter filter=new IntentFilter();
+		filter.addAction(G.SEND_BACK_HOME);
+		registerReceiver(homeReceiver, filter);
+	}
+	
+	
+	
+}

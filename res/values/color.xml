@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#f3f3f3</color>
+    <color name="black">#000</color>
+    <color name="black9">#333333</color>
+    <color name="black8">#666666</color>
+    <color name="white">#fff</color>
+    <color name="gray">#ccc</color>
+    <color name="blue">#00f</color>
+    <color name="title">#666</color>
+    <color name="info">#999</color>
+    <color name="text_default">#333333</color>
+    <color name="text_btn">#333333</color>
+    <color name="text_em">#f60</color>
+    <color name="nav_current">#ff9900</color>
+    <color name="shadow_color">#ff000000</color>
+    <color name="viewfinder_frame">#ff000000</color>
+  	<color name="viewfinder_laser">#ffff0000</color>
+  	<color name="viewfinder_mask">#60000000</color>
+  	<color name="result_view">#b0000000</color>
+  	<color name="possible_result_points">#c0ffff00</color>
+  	<color name="tag0">#F9AfBC</color>  
+  	<color name="tag1">#E2D3D6</color>  
+  	<color name="tag2">#C0B4B8</color>  
+  	<color name="tag3">#8A7379</color>  
+  	<color name="tag4">#E3D2A4</color>  
+  	<color name="tag5">#AAC494</color>  
+  	<color name="tag6">#85B07A</color>  
+  	<color name="tag7">#778878</color>  
+  	<color name="tag8">#D3B495</color>  
+  	<color name="tag9">#E7E6CA</color>  
+</resources>

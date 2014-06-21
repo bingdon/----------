@@ -1,0 +1,75 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg" >
+    
+    <EditText
+        android:id="@+id/editText"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content">
+	    <requestFocus></requestFocus>
+	</EditText>
+    
+    
+    <!-- 鼠标键盘 -->
+    <LinearLayout
+	    android:id="@+id/main"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+	    
+        <!-- 标题条 -->
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_gravity="top"
+	    	android:gravity="center_vertical"
+	    	android:orientation="horizontal"
+	    	android:background="@drawable/bg_title"
+	    	>
+			<ImageButton 
+			    android:id="@+id/btnBack"
+			    android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:background="@drawable/btn_title_bg"
+	    		android:src="@drawable/btn_back"
+	    		android:onClick="doClick"
+			    />
+	        <TextView
+	            android:id="@+id/title"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:text="@string/mouse_keyboard" 
+			    android:textColor="@color/title"
+			    android:textSize="@dimen/text_big"
+			    android:gravity="center"
+			    android:layout_weight="1"/>
+			<ImageButton 
+			    android:id="@+id/btnKeyboard"
+			    android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:background="@drawable/btn_title_bg"
+	    		android:src="@drawable/btn_keyboard"
+	    		android:onClick="doClick"
+			    />
+	    </LinearLayout>
+
+	    <!-- 鼠标面板 -->
+	    <LinearLayout
+	        android:id="@+id/mousePanel"
+	        android:layout_width="fill_parent"
+	    	android:layout_height="fill_parent"
+	    	>
+			<ImageView
+			    android:id="@+id/mouse"
+			    android:layout_width="wrap_content"
+		   		android:layout_height="wrap_content"
+		   		android:background="@drawable/mouse"
+			    />
+	    </LinearLayout>
+	    
+	</LinearLayout>
+
+</FrameLayout>

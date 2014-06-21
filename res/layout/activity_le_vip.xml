@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg" >
+
+    <RelativeLayout
+        android:id="@+id/le_vip_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_title" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/levip"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            layout="@layout/menu_right" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/le_vip_fra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/le_vip_title_layout" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/le_vip_tabyouhui"
+                style="@style/nav2"
+                android:text="@string/youhuihuodong" />
+
+            <Button
+                android:id="@+id/le_vip_tabvip_center"
+                style="@style/nav2"
+                android:text="@string/vip_center" />
+
+            <Button
+                android:id="@+id/le_vip_table_pay"
+                style="@style/nav2"
+                android:onClick="doClick"
+                android:text="@string/le_pay" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/le_vip_tabCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/tab_current" />
+    </FrameLayout>
+
+    <ViewFlipper
+        android:id="@+id/le_vip_flipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/le_vip_fra" >
+
+    </ViewFlipper>
+
+</RelativeLayout>

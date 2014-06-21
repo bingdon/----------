@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+     android:label="@string/search"
+    android:hint="@string/search"
+    android:inputType="text"
+    android:searchMode="queryRewriteFromText"
+    android:voiceSearchMode="showVoiceSearchButton" 
+    android:searchSuggestAuthority="notes"
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSettingsDescription="@string/collect"
+    android:includeInGlobalSearch="true">
+
+</searchable>

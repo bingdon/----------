@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/yaoimageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_x="18dp"
+        android:layout_y="18dp"
+          android:layoutAnimation="@anim/layout_random_fade"
+        android:src="@drawable/img0" />
+
+    <ImageView
+        android:id="@+id/yaoimageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="173dp"
+        android:layout_y="159dp"
+        android:layoutAnimation="@anim/layout_random_fade"
+        android:src="@drawable/img6" />
+
+    <ImageView
+        android:id="@+id/yaoimageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="7dp"
+        android:layout_y="155dp"
+        android:src="@drawable/img1" />
+
+    <ImageView
+        android:id="@+id/yaoimageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="73dp"
+        android:layout_y="296dp"
+        android:src="@drawable/img5" />
+
+    <ImageView
+        android:id="@+id/yaoimageView3"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_x="168dp"
+        android:layout_y="30dp"
+        android:src="@drawable/img3" />
+
+</AbsoluteLayout>

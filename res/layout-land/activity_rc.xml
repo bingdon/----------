@@ -1,0 +1,237 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg" >
+    
+    <!-- 首页 -->
+    <LinearLayout
+	    android:id="@+id/main"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+	    
+        <!-- 标题条 -->
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_gravity="top"
+	    	android:gravity="center_vertical"
+	    	android:orientation="horizontal"
+	    	android:background="@drawable/bg_title"
+	    	>
+			<ImageButton 
+			    android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:background="@drawable/btn_title_bg"
+			    />
+	        <TextView
+	            android:id="@+id/title"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:text="@string/rc" 
+			    android:textColor="@color/title"
+			    android:textSize="@dimen/text_big"
+			    android:gravity="center"
+			    android:layout_weight="1"/>
+			<ImageButton 
+	            android:id="@+id/btnQrcode"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	            android:background="@drawable/btn_title_bg"
+	            android:src="@drawable/btn_qrcode"
+	    		android:onClick="doClick"
+	            />
+	    </LinearLayout>
+	    
+	    <!-- 功能按钮 -->
+	    <FrameLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="0dp"
+	    	android:padding="@dimen/padding_middle"
+	    	android:layout_weight="1">
+			
+	        <ImageButton
+	            android:id="@+id/btnSwitch"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/btn_middle_bg"
+	            android:onClick="doClick"
+	            android:src="@drawable/icon_number" />
+
+	        <ImageButton
+	            android:id="@+id/btnMouse"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="top|right"
+	            android:background="@drawable/btn_middle_bg"
+	            android:onClick="doClick"
+	            android:src="@drawable/icon_mouse" />
+	        
+	        <FrameLayout
+		        android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:layout_gravity="center"
+		    	android:background="@drawable/bg_lurb"
+		    	>
+		    	<ImageButton
+		            android:id="@+id/btnUp"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="top|center_horizontal"
+			    	android:background="@drawable/btn_up_bg"	    	
+			    	android:onClick="doClick"
+			    	/>
+		    	<ImageButton
+		            android:id="@+id/btnRight"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center_vertical|right"
+			    	android:background="@drawable/btn_right_bg"	    	
+			    	android:onClick="doClick"
+			    	/>
+		    	<ImageButton
+		            android:id="@+id/btnBottom"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="bottom|center_horizontal"
+			    	android:background="@drawable/btn_down_bg"	    	
+			    	android:onClick="doClick"
+			    	/>
+		    	<ImageButton
+		            android:id="@+id/btnLeft"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center_vertical|left"
+			    	android:background="@drawable/btn_left_bg"	    	
+			    	android:onClick="doClick"
+			    	/>
+		    	<ImageButton
+		            android:id="@+id/btnOk"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center"
+			    	android:background="@drawable/btn_big"	
+			    	android:src="@drawable/icon_ok"    	
+			    	android:onClick="doClick"
+			    	/>
+	       </FrameLayout>
+	    
+	    
+	    <!-- 主按钮 -->
+    	<TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="bottom|left">
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:paddingBottom="@dimen/padding_middle">
+                <ImageButton
+		            android:id="@+id/btnHome"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_marginRight="@dimen/padding_middle"
+			    	android:background="@drawable/btn_middle_bg"
+			    	android:src="@drawable/icon_home"		    	
+			    	android:onClick="doClick"
+			    	/>
+                <ImageButton
+		            android:id="@+id/btnMenu"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:background="@drawable/btn_middle_bg"
+			    	android:src="@drawable/icon_menu"
+			    	android:onClick="doClick"
+			    	/>
+            </TableRow>
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                <ImageButton
+		            android:id="@+id/btnMusic"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_marginRight="@dimen/padding_middle"
+			    	android:background="@drawable/btn_middle_bg"
+			    	android:src="@drawable/icon_music"		    	
+			    	android:onClick="doClick"
+			    	/>
+                <ImageButton
+		            android:id="@+id/btnBack"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:background="@drawable/btn_middle_bg"
+			    	android:src="@drawable/icon_back"		    	
+			    	android:onClick="doClick"
+			    	/>
+            </TableRow>
+	    </TableLayout>
+	    
+	    
+	    <!-- 彩色按钮 -->
+	    <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_gravity="bottom|right">
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:paddingBottom="@dimen/padding">
+                <ImageButton
+	            	android:id="@+id/btnRed"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center"
+			    	android:layout_marginRight="@dimen/padding_middle"
+			    	android:background="@android:color/transparent"
+			    	android:src="@drawable/btn_red_bg"   
+			    	android:onClick="doClick"
+			    	/>
+				<ImageButton
+		            android:id="@+id/btnYellow"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center"
+			    	android:background="@android:color/transparent"
+			    	android:src="@drawable/btn_yellow_bg"   
+			    	android:onClick="doClick"
+			    	/>
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+                <ImageButton
+		            android:id="@+id/btnBlue"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center"
+			    	android:layout_marginRight="@dimen/padding_middle"
+			    	android:background="@android:color/transparent"
+			    	android:src="@drawable/btn_blue_bg"   
+			    	android:onClick="doClick"
+			    	/>
+				<ImageButton
+		            android:id="@+id/btnGreen"
+			        android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_gravity="center"
+			    	android:background="@android:color/transparent"
+			    	android:src="@drawable/btn_green_bg"    	
+			    	android:onClick="doClick"
+			    	/>
+            </TableRow>
+	    </TableLayout>
+	    
+
+	   </FrameLayout>
+	    
+	</LinearLayout>
+
+</FrameLayout>

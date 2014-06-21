@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tv.luxs.rcassistant"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    
+    
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
+    <!-- android:largeHeap="true" -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="cat.projects.mediaplayer_ui.DMCPlayerActivity"
+            android:label="@string/push"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="cat.projects.mediaplayer_ui.DMCRenderListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <service
+            android:name="cat.projects.dmc_service.DMCMediaService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/bingnotitle" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LeActivity"
+            android:theme="@style/Theme.PageIndicatorDefaults" >
+            
+              <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/bing_search" />
+           
+        </activity>
+        <activity
+            android:name=".RCActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".MouseKeyboardActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysVisible" >
+        </activity>
+        <activity
+            android:name=".PushActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".UserActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".MoreActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".FileListActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".SearchFileActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            
+           
+            
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".SettingConnectActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar" android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".SettingServerCountActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".SettingVibrationActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".SettingSensitivityActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".SettingPushActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".SettingPushCommonCountActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+
+        <provider
+            android:name="net.zhaidian.provider.IPsProvider"
+            android:authorities="net.zhaidian.provider.IPsProvider" >
+        </provider>
+        <provider
+            android:name="net.zhaidian.provider.FileProvider"
+            android:authorities="net.zhaidian.provider.FileProvider" >
+        </provider>
+
+        <activity
+            android:name="LeVipActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="UserInfoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name="UserBookActivity" >
+        </activity>
+        <activity android:name="UserPastRecored" >
+        </activity>
+        <activity android:name="DaiJinquanActivity" >
+        </activity>
+        <activity android:name="WaitDetctOrder" >
+        </activity>
+        <activity android:name="HistoryOrderActivity" >
+        </activity>
+        <activity android:name="OrderInfo" >
+        </activity>
+        <activity android:name="PayStyleActivity" >
+        </activity>
+        <activity android:name="LoginActivity" >
+        </activity>
+        <activity android:name="RegisterActivity" >
+        </activity>
+        <activity android:name="MySearchActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            
+              <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:resource="@xml/bing_search" />
+            
+        </activity>
+        <activity android:name="BusinessInfoActivity"></activity>
+        <activity android:name="BusinessInfo2Activity"></activity>
+        <activity android:name="YudingActivity"></activity>
+        <activity android:name="CaiDanActivity" 
+          android:theme="@style/Theme.PageIndicatorDefaults"  ></activity>
+        <activity android:name="OrderFood"></activity>
+        
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".LeActivity" />
+        <activity android:name="SuijiaMaActivity" android:theme="@android:style/Theme.Translucent"></activity>
+        <activity android:name="AboutActivity"></activity>
+        <activity android:name="MainActivityt" android:theme="@style/bingnotitle" android:launchMode="singleTask" android:screenOrientation="portrait"></activity>
+        <activity android:theme="@style/bingnotitle" android:name="LocalActivity"></activity>
+        <activity android:name="YaoYiYao"></activity>
+        <activity android:name="WebActivity" android:theme="@style/bingnotitle" android:launchMode="singleTask"></activity>
+        <activity android:name="LeSahre" ></activity>
+        <activity android:name="YaoYiYao_yy"></activity>
+        <activity android:name="Yao2yao"></activity>
+        <service android:name=".service.SearchIpService"></service>
+        <receiver android:name=".receiver.SecConReceiver">
+            <intent-filter>
+                <action android:name="com.luxshare.connect"/>
+                <action android:name="ACTION.LUXSHARE.OPENGPS"/>
+                <action android:name="action.luxshare.erro.password"/>
+            </intent-filter>
+        </receiver>
+        <provider android:name="net.zhaidian.provider.GpsowifiProvider" android:authorities="net.zhaidian.provider.GpsowifiProvider"></provider>
+        
+        
+    </application>
+
+</manifest>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tv.luxs.rcassistant"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="13" />
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_VIDEO" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <user-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    
+	<!-- android:largeHeap="true" -->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" 
+        android:largeHeap="true"
+        >
+         <activity
+            android:name="cat.projects.mediaplayer_ui.DMCPlayerActivity"
+            android:label="@string/push"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="cat.projects.mediaplayer_ui.DMCRenderListActivity"
+             android:label="@string/app_name"
+               android:screenOrientation="portrait" >
+        </activity>
+
+        <service
+            android:name="cat.projects.dmc_service.DMCMediaService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        
+        <activity
+            
+            android:name=".MainActivity"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity 
+            android:name=".LeActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".RCActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".MouseKeyboardActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysVisible"></activity>
+        <activity 
+            android:name=".PushActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".UserActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".MoreActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".FileListActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SearchFileActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SettingActivity"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SettingConnectActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SettingServerCountActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SettingVibrationActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SettingSensitivityActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        
+        <activity 
+            android:name=".SettingPushActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        <activity 
+            android:name=".SettingPushCommonCountActivity"
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
+        
+        <activity
+            android:configChanges="orientation|keyboardHidden"
+            android:name="com.zxing.activity.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <provider 
+ 		    android:name="net.zhaidian.provider.IPsProvider"
+ 		    android:authorities="net.zhaidian.provider.IPsProvider"></provider>
+        <provider 
+ 		    android:name="net.zhaidian.provider.FileProvider"
+ 		    android:authorities="net.zhaidian.provider.FileProvider"></provider>
+    </application>
+
+</manifest>

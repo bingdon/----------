@@ -1,0 +1,58 @@
+package net.zhaidian.more;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.zhaidian.file.FileBean;
+import net.zhaidian.file.Ilister;
+
+import org.apache.http.NameValuePair;
+
+import tv.luxs.config.G;
+import tv.luxs.rcassistant.R;
+
+public class MoreSettingLister implements Ilister {
+
+	@Override
+	public List<?> getList(FileBean fileBean) {
+		FileBean fileBean1 = new FileBean();
+		fileBean1.setFileName(fileBean.getContext().getString(R.string.setting_rc));
+		fileBean1.setFileType(G.SETTING_RC);
+		
+		FileBean fileBean2 = new FileBean();
+		fileBean2.setFileName(fileBean.getContext().getString(R.string.setting_push));
+		fileBean2.setFileType(G.SETTING_PUSH);
+		
+		/*FileBean fileBean3 = new FileBean();
+		fileBean3.setFileName(fileBean.getContext().getString(R.string.setting_shake));
+		fileBean3.setFileType(G.SETTING_SHAKE);*/
+		
+		FileBean fileBean4 = new FileBean();
+		fileBean4.setFileName(fileBean.getContext().getString(R.string.setting_logout));
+		fileBean4.setFileType(G.SETTING_LOGOUT);
+		
+		List<FileBean> resultList = new ArrayList<FileBean>();
+		resultList.add(fileBean1);
+		resultList.add(fileBean2);
+		resultList.add(fileBean4);
+		//resultList.add(fileBean3);
+ 		return resultList;
+	}
+
+	@Override
+	public List<?> getList(FileBean fileBean, List<NameValuePair> postParameters) {
+		//获取云端数据
+		return null;
+	}
+
+	@Override
+	public int getCount(FileBean fileBean) {
+		return 0;
+	}
+
+	@Override
+	public int getRemoteCount(FileBean fileBean) {
+		return 0;
+	}
+
+}

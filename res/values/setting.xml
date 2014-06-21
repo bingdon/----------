@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   	<string-array name="setting">
+   	    <item>连接机顶盒</item>
+   	    <item>设置机顶盒最大显示数量</item>
+   	    <item>设置按键振动强度</item>
+   	    <item>设置按键灵敏度</item>
+   	</string-array>
+</resources>

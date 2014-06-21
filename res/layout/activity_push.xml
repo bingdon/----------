@@ -1,0 +1,112 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wrapper"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg" >
+    
+    <!-- 首页 -->
+    <LinearLayout
+	    android:id="@+id/main"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+	    
+        <!-- 标题条 -->
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:layout_gravity="top"
+	    	android:gravity="center_vertical"
+	    	android:orientation="horizontal"
+	    	android:background="@drawable/bg_title"
+	    	>
+			<ImageButton 
+	            android:id="@+id/btnSearch"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	            android:background="@drawable/btn_title_bg"
+	            android:src="@drawable/btn_search"
+	    		android:onClick="doClick"
+	            />
+	        <TextView
+	            android:id="@+id/title"
+			    android:layout_width="0dp"
+			    android:layout_height="wrap_content"
+			    android:text="@string/push" 
+			    android:textColor="@color/title"
+			    android:textSize="@dimen/text_big"
+			    android:gravity="center"
+			    android:layout_weight="1"/>
+			
+      	  <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            layout="@layout/menu_right" />
+	    </LinearLayout>
+	    
+	    <!-- 二级导航 -->
+	    <FrameLayout 
+	        android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	        >
+	        <LinearLayout
+		        android:layout_width="fill_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:background="@android:color/transparent">
+		        <Button 
+		            android:id="@+id/tabCommon"
+		            style="@style/nav2"
+		    		android:text="@string/tab_common"
+		    		android:onClick="doClick"
+		            />
+		        <Button 
+		            android:id="@+id/tabImage"
+		            style="@style/nav2"
+		    		android:text="@string/tab_image"
+		    		android:onClick="doClick"
+		            />
+		        <Button 
+		            android:id="@+id/tabMusic"
+		            style="@style/nav2" 
+		    		android:text="@string/tab_music"
+		    		android:onClick="doClick"
+		            />
+		        <Button 
+		            android:id="@+id/tabVideo"
+		            style="@style/nav2"
+		    		android:text="@string/tab_video"
+		    		android:onClick="doClick"
+		            />
+		        <Button 
+		            android:id="@+id/tabCloud"
+		            style="@style/nav2"
+		    		android:text="@string/tab_cloud"
+		    		android:onClick="doClick"
+		            />
+		    </LinearLayout>
+		    
+		    <ImageView 
+		        android:id="@+id/tabCurrent"
+		        android:layout_width="wrap_content"
+		    	android:layout_height="wrap_content"
+		    	android:background="@drawable/tab_current"
+		    	android:layout_gravity="bottom"
+		        />
+		    
+	    </FrameLayout>
+	    
+	    <!-- 滑动视图 -->
+	    <ViewFlipper
+		    android:id="@+id/flipper"
+		    android:layout_width="fill_parent"
+	    	android:layout_height="0dp"
+	    	android:layout_weight="1">
+		</ViewFlipper>
+
+	</LinearLayout>
+
+</FrameLayout>

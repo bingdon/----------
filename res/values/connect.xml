@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   	<string-array name="connect">
+   	    <item>扫描二维码连接机顶盒</item>
+   	</string-array>
+</resources>
